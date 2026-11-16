@@ -32,3 +32,45 @@ matches = df[df["HomeTeam"] == team]
 print(matches[["HomeTeam", "FTHG"]].head())
 print("Partidos como local:", len(matches))
 print("Promedio de goles:", matches["FTHG"].mean())
+
+away_matches = df[df["AwayTeam"] == team]
+
+print("Partidos como visitante:", len(away_matches))
+
+away_avg = away_matches["FTAG"].mean()
+
+print("Promedio de goles como visitante:", away_avg)
+
+
+homeTeam = df.groupby("HomeTeam")["FTHG"].mean()
+
+print(homeTeam.sort_values(ascending=False))
+
+
+home_conceded = df.groupby("HomeTeam")["FTAG"].mean()
+
+print(home_conceded.sort_values())
+
+
+awayTeam = df.groupby("AwayTeam")["FTAG"].mean()
+
+print("Goles marcados como visitante:")
+print(awayTeam.sort_values(ascending=False))
+
+
+away_conceded = df.groupby("AwayTeam")["FTHG"].mean()
+
+print("Goles recibidos como visitante:")
+print(away_conceded.sort_values())
+
+
+# Home wins = H, Draw D, away = A
+
+
+Home_wins = df[df["FTR"] == "H"]
+Draws = df[df["FTR"] == "D"]
+Away_wins = df[df["FTR"] == "A"]
+
+print("Partidos ganados por el equipo local:", len(Home_wins))
+print("Partidos empatados:", len(Draws))
+print("Partidos ganados por el equipo visitante:", len(Away_wins))
